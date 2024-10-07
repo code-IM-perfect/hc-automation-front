@@ -6,7 +6,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { MoreVertical, User, Calendar } from "lucide-react"
 
-type Patient = {
+type Treatment = {
   id: string
   name: string
   description: string
@@ -14,27 +14,27 @@ type Patient = {
   schedule: string
 }
 
-const patients: Patient[] = [
-  { id: '1', name: 'John Doe', description: 'Regular checkup', status: 'scheduled', schedule: '' },
-  { id: '2', name: 'Jane Smith', description: 'Follow-up appointment', status: 'pending', schedule: 'xray' },
-  { id: '3', name: 'Bob Johnson', description: 'Test results review', status: 'completed', schedule: '1 Oct 2024' },
-  { id: '4', name: 'Alice Brown', description: 'Vaccination', status: 'scheduled', schedule: '' },
-  { id: '5', name: 'Charlie Davis', description: 'Physical therapy', status: 'pending', schedule: 'pharma' },
-  { id: '6', name: 'Charlie', description: 'Physical therapy', status: 'pending', schedule: '' },
-  { id: '7', name: 'Eva Wilson', description: 'Post-surgery checkup', status: 'completed', schedule: '30 Sept 2024' },
+const treatments: Treatment[] = [
+  { id: '1', name: 'John Doe', description: 'Regular checkup', status: 'scheduled', schedule: '1 Oct 2024' },
+  { id: '2', name: 'John Doe', description: 'Follow-up appointment', status: 'pending', schedule: 'xray' },
+  { id: '3', name: 'John Doe', description: 'Test results review', status: 'completed', schedule: '1 Oct 2024' },
+  { id: '4', name: 'John Doe', description: 'Vaccination', status: 'scheduled', schedule: '1 Oct 2024' },
+  { id: '5', name: 'John Doe', description: 'Physical therapy', status: 'pending', schedule: 'pharma' },
+  { id: '6', name: 'John Doe', description: 'Physical therapy', status: 'pending', schedule: '' },
+  { id: '7', name: 'John Doe', description: 'Post-surgery checkup', status: 'completed', schedule: '30 Sept 2024' },
 ]
 
-export default function DoctorDashboard() {
+export default function PatientDashboard() {
   const [activeTab, setActiveTab] = useState<'scheduled' | 'pending' | 'completed'>('scheduled')
 
-  const filteredPatients = patients.filter(patient => patient.status === activeTab)
+  const filteredTreatments = treatments.filter(patient => patient.status === activeTab)
 
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
       <div className="w-64 bg-white shadow-md">
         <div className="p-4">
-          <h1 className="text-2xl font-bold mb-4">{activeTab}</h1>
+          <h1 className="text-2xl font-bold mb-4">HC Automation                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </h1>
           <nav>
             {(['scheduled', 'pending', 'completed'] as const).map((tab) => (
               <button
@@ -52,14 +52,13 @@ export default function DoctorDashboard() {
 
       {/* Main content */}
       <div className="flex-1 p-8 overflow-auto">
-        <h2 className="text-3xl font-bold mb-6">{activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Patients</h2>
+        <h2 className="text-3xl font-bold mb-6">{activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Treatments</h2>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {filteredPatients.map((patient) => (
+          {filteredTreatments.map((patient) => (
             <Card key={patient.id}>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
-                  <User className="w-4 h-4 inline-block mr-2" />
-                  {patient.name}
+                  {patient.description}
                 </CardTitle>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -75,9 +74,11 @@ export default function DoctorDashboard() {
                 </DropdownMenu>
               </CardHeader>
               <CardContent>
-                <p className="text-xs text-muted-foreground">{patient.description}</p>
+                <p className=' text-sm'><User className="w-3 h-3 inline-block mr-2" />
+                  {patient.name}</p>
 
-                {((pat: Patient) => {
+
+                {((pat: Treatment) => {
                   if (pat.status == "scheduled" || pat.status == "completed") {
                     return (
                       <div className="flex items-center text-xs text-muted-foreground">
