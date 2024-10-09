@@ -10,7 +10,7 @@ const Excalidraw = dynamic(
 import { exportToCanvas } from "@excalidraw/excalidraw";
 import { Button } from "@/components/ui/button";
 
-export default function scribblePage() {
+export default function ScribblePage() {
     const [canvasUrl, setCanvasUrl] = useState("");
     const [excalidrawAPI, setExcalidrawAPI] = useState(null);
     return (
