@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { MoreVertical, User, Calendar } from "lucide-react"
+import { MoreVertical, User, Calendar, CalendarCheck } from "lucide-react"
 
 type Patient = {
   id: string
@@ -30,17 +30,17 @@ export default function DoctorDashboard() {
   const filteredPatients = patients.filter(patient => patient.status === activeTab)
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen">
       {/* Sidebar */}
-      <div className="w-64 bg-white shadow-md">
+      <div className="w-64 shadow-md">
         <div className="p-4">
-          <h1 className="text-2xl font-bold mb-4">{activeTab}</h1>
+          <h1 className="text-2xl font-bold mb-4">HC Automation</h1>
           <nav>
             {(['scheduled', 'pending', 'completed'] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`w-full text-left py-2 px-4 rounded ${activeTab === tab ? 'bg-blue-500 text-white' : 'hover:bg-gray-100'
+                className={`w-full text-left py-2 px-4 rounded ${activeTab === tab ? 'bg-blue-500 text-white' : ''
                   }`}
               >
                 {tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -87,7 +87,7 @@ export default function DoctorDashboard() {
                     )
                   }
                   else {
-                    var mess;
+                    let mess;
                     switch (pat.schedule) {
                       case "xray":
                         mess = "Sent to X-Ray"

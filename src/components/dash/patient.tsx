@@ -88,7 +88,7 @@ export default function PatientDashboard() {
                     )
                   }
                   else {
-                    var mess;
+                    let mess;
                     switch (pat.schedule) {
                       case "xray":
                         mess = "Sent to X-Ray"
