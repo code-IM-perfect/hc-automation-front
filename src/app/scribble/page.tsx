@@ -9,11 +9,14 @@ const Excalidraw = dynamic(
 );
 import { exportToCanvas } from "@excalidraw/excalidraw";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import { type ExcalidrawImperativeAPI } from "@excalidraw/excalidraw/types/types";
 
 export default function ScribblePage() {
     const [canvasUrl, setCanvasUrl] = useState("");
-    const [excalidrawAPI, setExcalidrawAPI] = useState(null);
+    const [excalidrawAPI, setExcalidrawAPI] = useState<ExcalidrawImperativeAPI | null>(null);
+
+    const [counter, setCounter] = useState(false);
+
     return (
         <>
             <div className="h-[90vh] grid place-items-center">
@@ -27,7 +30,7 @@ export default function ScribblePage() {
                     </div>
                 </div>
             </div>
-            <div className="flex justify-center">
+            <div className="grid place-items-center">
                 <Button className=""
                     onClick={async () => {
                         if (!excalidrawAPI) {
@@ -46,10 +49,16 @@ export default function ScribblePage() {
                             // getDimensions: () => { return { width: 350, height: 350 } }
                         });
                         setCanvasUrl(canvas.toDataURL());
+
+                        setCounter(false)
                     }}
                 >Generate Prescription</Button>
-                <div className="export export-canvas">
-                    <Image src={canvasUrl} alt="Exported Prescription" />
+                <div className="export export-canvas grid justify-items-center" style={{ display: useState(counter) ? "block" : "none" }}>
+                    <img src={canvasUrl} alt="" className="w-[80vw] m-10" />
+
+                    <div className="grid justify-items-center mb-10">
+                        <Button>Proceed &gt;</Button>
+                    </div>
                 </div>
             </div>
         </>
