@@ -9,6 +9,7 @@ const Excalidraw = dynamic(
 );
 import { exportToCanvas } from "@excalidraw/excalidraw";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 export default function ScribblePage() {
     const [canvasUrl, setCanvasUrl] = useState("");
@@ -48,7 +49,7 @@ export default function ScribblePage() {
                     }}
                 >Generate Prescription</Button>
                 <div className="export export-canvas">
-                    <img src={canvasUrl} alt="" />
+                    <Image src={canvasUrl} alt="Exported Prescription" />
                 </div>
             </div>
         </>
